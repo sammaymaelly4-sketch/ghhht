@@ -99,8 +99,23 @@ export function PlanoTab({ city }: { city: string }) {
   );
 }
 
-function Horizonte({ num, bord, bg, title, sub, items, col }: any) {
-  const colors: any = {
+interface HorizonteItem {
+  t: string;
+  d: string;
+}
+
+interface HorizonteProps {
+  num: string;
+  bord: string;
+  bg: string;
+  title: string;
+  sub: string;
+  items: HorizonteItem[];
+  col: "red" | "orange" | "emerald";
+}
+
+function Horizonte({ num, bord, bg, title, sub, items, col }: HorizonteProps) {
+  const colors: Record<string, string> = {
     red: "bg-red-50 border-red-200 hover:border-red-400 text-red-500 text-red-800",
     orange: "bg-orange-50 border-orange-200 hover:border-orange-400 text-orange-500 text-orange-800",
     emerald: "bg-emerald-50 border-emerald-200 hover:border-emerald-400 text-emerald-500 text-emerald-800",
@@ -121,7 +136,7 @@ function Horizonte({ num, bord, bg, title, sub, items, col }: any) {
         </div>
       </div>
       <div className="space-y-3">
-        {items.map((i: any, idx: number) => (
+        {items.map((i, idx) => (
           <div
             key={idx}
             className={`rounded-xl border-2 p-4 transition-all hover:-translate-y-1 ${itemBg} ${itemBorder} ${itemHover}`}

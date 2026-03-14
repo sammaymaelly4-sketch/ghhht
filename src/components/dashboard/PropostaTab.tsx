@@ -8,6 +8,7 @@ import {
   Calculator,
   MessageCircle,
   Mail,
+  type LucideIcon,
 } from "lucide-react";
 
 export function PropostaTab({ city }: { city: string }) {
@@ -128,8 +129,16 @@ export function PropostaTab({ city }: { city: string }) {
   );
 }
 
-function PropCard({ col, icon: Icon, title, price, desc }: any) {
-  const colors: any = {
+interface PropCardProps {
+  col: "blue" | "emerald" | "purple";
+  icon: LucideIcon;
+  title: string;
+  price: string;
+  desc: string;
+}
+
+function PropCard({ col, icon: Icon, title, price, desc }: PropCardProps) {
+  const colors: Record<string, string> = {
     blue: "border-blue-200 hover:border-blue-400 bg-blue-100 text-blue-600 text-blue-700",
     emerald: "border-emerald-200 hover:border-emerald-400 bg-emerald-100 text-emerald-600 text-emerald-700",
     purple: "border-purple-200 hover:border-purple-400 bg-purple-100 text-purple-600 text-purple-700",
