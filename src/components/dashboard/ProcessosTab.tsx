@@ -67,7 +67,14 @@ export function ProcessosTab({ city }: { city: string }) {
   );
 }
 
-function VaraCard({ tit, vara, v, tot }: any) {
+interface VaraCardProps {
+  tit: string;
+  vara: string;
+  v: { n: number; tr: number; p1: number; p2: number; val: number };
+  tot: number;
+}
+
+function VaraCard({ tit, vara, v, tot }: VaraCardProps) {
   const p = tot ? ((v.n / tot) * 100).toFixed(0) : 0;
   return (
     <div className="rounded-xl border-2 border-slate-200 p-6 transition-all hover:-translate-y-1 hover:border-blue-400">
@@ -114,7 +121,16 @@ function VaraCard({ tit, vara, v, tot }: any) {
   );
 }
 
-function TrFase({ label, hov, v1, v2, tot, total }: any) {
+interface TrFaseProps {
+  label: string;
+  hov: string;
+  v1: number;
+  v2: number;
+  tot: number;
+  total: number;
+}
+
+function TrFase({ label, hov, v1, v2, tot, total }: TrFaseProps) {
   const p = total ? ((tot / total) * 100).toFixed(0) : 0;
   return (
     <tr className={`border-b border-slate-200 transition-colors ${hov}`}>
@@ -127,24 +143,29 @@ function TrFase({ label, hov, v1, v2, tot, total }: any) {
   );
 }
 
-function TeseDetail({ teses, total }: any) {
-  const cols: any = {
+interface TeseDetailProps {
+  teses: { jornada: number; adicionais: number; reajuste: number; outros: number };
+  total: number;
+}
+
+function TeseDetail({ teses, total }: TeseDetailProps) {
+  const cols: Record<string, string> = {
     jornada: "bg-red-500",
     adicionais: "bg-amber-500",
     reajuste: "bg-emerald-500",
     outros: "bg-slate-400",
   };
-  const lbls: any = {
+  const lbls: Record<string, string> = {
     jornada: "Excesso de Jornada",
     adicionais: "Adicionais (Insalubridade/Periculosidade)",
     reajuste: "Reajuste Salarial",
     outros: "Outras Teses",
   };
-  const max = Math.max(...Object.values(teses as Record<string, number>), 1);
+  const max = Math.max(...Object.values(teses), 1);
 
   return (
     <div className="space-y-3">
-      {Object.entries(teses).map(([k, v]: any) => {
+      {Object.entries(teses).map(([k, v]) => {
         const p = total ? ((v / total) * 100).toFixed(1) : 0;
         const bw = Math.round((v / max) * 100);
         return (

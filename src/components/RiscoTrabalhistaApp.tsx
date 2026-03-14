@@ -17,7 +17,14 @@ let DefaultIcon = L.icon({
 L.Marker.prototype.options.icon = DefaultIcon;
 
 // COMPONENTES EXTRAÍDOS PARA EVITAR RE-RENDER E VAZAMENTO DE MEMÓRIA
-const KPICard = React.memo(({ titulo, valor, icon, tendencia }: any) => (
+interface KPICardProps {
+  titulo: string;
+  valor: string | number;
+  icon: string;
+  tendencia: string;
+}
+
+const KPICard = React.memo(({ titulo, valor, icon, tendencia }: KPICardProps) => (
   <div className="bg-white p-4 rounded-lg shadow border-l-4 border-blue-500">
     <p className="text-sm text-gray-600">{titulo}</p>
     <p className="text-2xl font-bold mt-2">{valor}</p>

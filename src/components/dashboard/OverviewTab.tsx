@@ -16,6 +16,7 @@ import {
   Gavel,
   Calendar,
   AlertTriangle,
+  type LucideIcon,
 } from "lucide-react";
 import { Doughnut, Bar } from "react-chartjs-2";
 import {
@@ -66,7 +67,14 @@ function sstDesc(v: number) {
   return "2–4 servidores municipais por 1 ano";
 }
 
-function mainTese(t: any, tot: number) {
+interface TesesData {
+  jornada: number;
+  adicionais: number;
+  reajuste: number;
+  outros: number;
+}
+
+function mainTese(t: TesesData, tot: number) {
   const p = tot ? (((t.jornada + t.adicionais) / tot) * 100).toFixed(1) : 0;
   return `${p}% dos processos concentram-se em Jornada + Adicionais — falha estrutural sistêmica`;
 }
@@ -307,7 +315,27 @@ export function OverviewTab({ city }: { city: string }) {
   );
 }
 
-function MetricCard({ title, value, icon: Icon, iconColor, iconBg, borderColor, subIcon: SubIcon, subText }: any) {
+interface MetricCardProps {
+  title: string;
+  value: string | number;
+  icon: LucideIcon;
+  iconColor: string;
+  iconBg: string;
+  borderColor: string;
+  subIcon: LucideIcon;
+  subText: string;
+}
+
+function MetricCard({
+  title,
+  value,
+  icon: Icon,
+  iconColor,
+  iconBg,
+  borderColor,
+  subIcon: SubIcon,
+  subText,
+}: MetricCardProps) {
   return (
     <div className={`rounded-2xl bg-white p-5 shadow-sm transition-all hover:-translate-y-1 hover:shadow-lg border-l-4 border-transparent ${borderColor}`}>
       <div className="mb-3 flex items-center justify-between">
@@ -325,7 +353,14 @@ function MetricCard({ title, value, icon: Icon, iconColor, iconBg, borderColor, 
   );
 }
 
-function FaseItem({ color, label, val, tot }: any) {
+interface FaseItemProps {
+  color: string;
+  label: string;
+  val: number;
+  tot: number;
+}
+
+function FaseItem({ color, label, val, tot }: FaseItemProps) {
   const p = tot ? ((val / tot) * 100).toFixed(0) : 0;
   return (
     <div className="flex items-center justify-between rounded-lg bg-slate-50 p-2.5 text-sm transition-colors hover:bg-blue-50">
@@ -340,8 +375,16 @@ function FaseItem({ color, label, val, tot }: any) {
   );
 }
 
-function ImpactCard({ icon: Icon, color, val, label, desc }: any) {
-  const colors: any = {
+interface ImpactCardProps {
+  icon: LucideIcon;
+  color: "blue" | "emerald" | "purple";
+  val: number;
+  label: string;
+  desc: string;
+}
+
+function ImpactCard({ icon: Icon, color, val, label, desc }: ImpactCardProps) {
+  const colors: Record<string, string> = {
     blue: "bg-blue-50 border-blue-200 hover:border-blue-400 text-blue-600 text-blue-800",
     emerald: "bg-emerald-50 border-emerald-200 hover:border-emerald-400 text-emerald-600 text-emerald-800",
     purple: "bg-purple-50 border-purple-200 hover:border-purple-400 text-purple-600 text-purple-800",

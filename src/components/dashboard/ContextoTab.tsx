@@ -9,6 +9,7 @@ import {
   CheckCircle2,
   MapPin,
   Users,
+  type LucideIcon,
 } from "lucide-react";
 
 export function ContextoTab({ city }: { city: string }) {
@@ -138,7 +139,14 @@ export function ContextoTab({ city }: { city: string }) {
   );
 }
 
-function IbgeCard({ icon: Icon, label, val, sub }: any) {
+interface IbgeCardProps {
+  icon: LucideIcon;
+  label: string;
+  val: string;
+  sub: string;
+}
+
+function IbgeCard({ icon: Icon, label, val, sub }: IbgeCardProps) {
   return (
     <div className="rounded-xl border-2 border-slate-100 p-5 transition-all hover:-translate-y-1 hover:border-emerald-200 hover:bg-emerald-50">
       <div className="mb-3 flex items-center gap-3">
@@ -153,14 +161,25 @@ function IbgeCard({ icon: Icon, label, val, sub }: any) {
   );
 }
 
-function NoticiaCard({ noticia }: any) {
-  const styles: any = {
+interface Noticia {
+  data: string;
+  manchete: string;
+  fonte: string;
+  impacto: "positivo" | "negativo" | "neutro" | "alerta";
+}
+
+interface NoticiaCardProps {
+  noticia: Noticia;
+}
+
+function NoticiaCard({ noticia }: NoticiaCardProps) {
+  const styles: Record<string, string> = {
     positivo: "border-emerald-200 bg-emerald-50 text-emerald-700",
     negativo: "border-red-200 bg-red-50 text-red-700",
     alerta: "border-amber-200 bg-amber-50 text-amber-700",
     neutro: "border-slate-200 bg-slate-50 text-slate-700",
   };
-  const icons: any = {
+  const icons: Record<string, JSX.Element> = {
     positivo: <CheckCircle2 className="h-4 w-4 text-emerald-600" />,
     negativo: <AlertCircle className="h-4 w-4 text-red-600" />,
     alerta: <AlertCircle className="h-4 w-4 text-amber-600" />,
