@@ -1,5 +1,5 @@
 import { motion } from "motion/react";
-import { ShieldHalf, Calendar, LogOut, Gavel, Coins, BarChart3 } from "lucide-react";
+import { ShieldHalf, Calendar, LogOut, Gavel, Coins, BarChart3, Map } from "lucide-react";
 import { DB, CITY_ORDER, NV_COL, NV_BG, NV_BR } from "../data/db";
 import { fmtM } from "../lib/utils";
 
@@ -7,11 +7,13 @@ export function CityScreen({
   user,
   onSelectCity,
   onOpenRegional,
+  onOpenMap,
   onLogout,
 }: {
   user: string;
   onSelectCity: (city: string) => void;
   onOpenRegional: () => void;
+  onOpenMap: () => void;
   onLogout: () => void;
 }) {
   return (
@@ -53,13 +55,22 @@ export function CityScreen({
           <p className="px-2 font-mono text-[0.65rem] tracking-[0.15em] text-slate-400">
             // SELECIONE O MUNICÍPIO PARA AUDITORIA
           </p>
-          <button
-            onClick={onOpenRegional}
-            className="flex items-center gap-2 rounded-xl bg-blue-600 px-5 py-2.5 text-sm font-bold text-white shadow-md shadow-blue-600/20 transition-all hover:-translate-y-0.5 hover:bg-blue-500 hover:shadow-lg hover:shadow-blue-500/30"
-          >
-            <BarChart3 className="h-4 w-4" />
-            Inteligência Regional
-          </button>
+          <div className="flex gap-2">
+            <button
+              onClick={onOpenMap}
+              className="flex items-center gap-2 rounded-xl bg-emerald-600 px-5 py-2.5 text-sm font-bold text-white shadow-md shadow-emerald-600/20 transition-all hover:-translate-y-0.5 hover:bg-emerald-500 hover:shadow-lg hover:shadow-emerald-500/30"
+            >
+              <Map className="h-4 w-4" />
+              Mapa Interativo
+            </button>
+            <button
+              onClick={onOpenRegional}
+              className="flex items-center gap-2 rounded-xl bg-blue-600 px-5 py-2.5 text-sm font-bold text-white shadow-md shadow-blue-600/20 transition-all hover:-translate-y-0.5 hover:bg-blue-500 hover:shadow-lg hover:shadow-blue-500/30"
+            >
+              <BarChart3 className="h-4 w-4" />
+              Inteligência Regional
+            </button>
+          </div>
         </div>
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
           {CITY_ORDER.map((nome, i) => {
