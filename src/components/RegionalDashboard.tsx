@@ -35,6 +35,7 @@ export function RegionalDashboard({ onBack }: { onBack: () => void }) {
     let totalPop = 0;
     let totalExposure = 0;
     let totalProcs = 0;
+    let totalScore = 0;
     const riskCount = { critico: 0, alto: 0, medio: 0, baixo: 0 };
     const partyCount: Record<string, number> = {};
     
@@ -45,6 +46,7 @@ export function RegionalDashboard({ onBack }: { onBack: () => void }) {
       totalPop += d.pop || 0;
       totalExposure += exposure;
       totalProcs += d.proc.total;
+      totalScore += d.score;
       riskCount[d.nivel]++;
       
       if (d.prefeito) {
@@ -68,7 +70,9 @@ export function RegionalDashboard({ onBack }: { onBack: () => void }) {
     // Format for PieChart
     const partyData = Object.entries(partyCount).map(([name, value]) => ({ name, value })).sort((a, b) => b.value - a.value);
 
-    return { totalPop, totalExposure, totalProcs, riskCount, cityData, topExposure, partyData };
+    const avgRiskScore = (totalScore / cityData.length).toFixed(1);
+
+    return { totalPop, totalExposure, totalProcs, riskCount, cityData, topExposure, partyData, avgRiskScore };
   }, []);
 
   const COLORS = ['#2563eb', '#3b82f6', '#60a5fa', '#93c5fd', '#bfdbfe'];
@@ -126,7 +130,7 @@ export function RegionalDashboard({ onBack }: { onBack: () => void }) {
           />
           <KpiCard 
             title="Média de Risco" 
-            value={(stats.cityData.reduce((acc, c) => acc + c.score, 0) / stats.cityData.length).toFixed(1)} 
+            value={stats.avgRiskScore}
             subtitle="Score médio (0-100)" 
             icon={Activity} 
             color="text-emerald-600" 
