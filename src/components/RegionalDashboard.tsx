@@ -9,8 +9,7 @@ import {
   Building2,
   PieChart as PieChartIcon,
   BarChart3,
-  Activity,
-  type LucideIcon
+  Activity
 } from "lucide-react";
 import { DB, CITY_ORDER, NV_COL, NV_LABEL } from "../data/db";
 import { fmtM, fmtFull } from "../lib/utils";
@@ -256,16 +255,7 @@ export function RegionalDashboard({ onBack }: { onBack: () => void }) {
   );
 }
 
-interface KpiCardProps {
-  title: string;
-  value: string;
-  subtitle: string;
-  icon: LucideIcon;
-  color: string;
-  bg: string;
-}
-
-function KpiCard({ title, value, subtitle, icon: Icon, color, bg }: KpiCardProps) {
+function KpiCard({ title, value, subtitle, icon: Icon, color, bg }: any) {
   return (
     <div className="rounded-2xl bg-white p-6 shadow-sm border border-slate-200 flex items-start gap-4">
       <div className={`rounded-xl ${bg} p-3 ${color}`}>

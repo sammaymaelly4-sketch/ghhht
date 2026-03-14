@@ -85,7 +85,7 @@ export function DashboardScreen({
                 <span className="text-[10px] font-bold uppercase tracking-widest text-blue-400">TRT-15 Compliance</span>
               </div>
             </div>
-            <button aria-label="Close sidebar" onClick={() => setSidebarOpen(false)} className="lg:hidden text-slate-400 hover:text-white transition-colors">
+            <button onClick={() => setSidebarOpen(false)} className="lg:hidden text-slate-400 hover:text-white transition-colors">
               <X className="h-6 w-6" />
             </button>
           </div>
@@ -137,7 +137,6 @@ export function DashboardScreen({
         <header className="flex h-20 shrink-0 items-center justify-between border-b border-slate-200 bg-white px-4 sm:px-8 shadow-sm z-10">
           <div className="flex items-center gap-4">
             <button
-              aria-label="Open sidebar"
               onClick={() => setSidebarOpen(true)}
               className="rounded-lg p-2 text-slate-500 hover:bg-slate-100 lg:hidden transition-colors"
             >

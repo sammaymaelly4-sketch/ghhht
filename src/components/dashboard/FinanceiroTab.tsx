@@ -1,14 +1,6 @@
 import { DB } from "../../data/db";
 import { fmtFull } from "../../lib/utils";
-import {
-  Coins,
-  Target,
-  Gavel,
-  FileText,
-  AlertTriangle,
-  Scale,
-  type LucideIcon,
-} from "lucide-react";
+import { Coins, Target, Gavel, FileText, AlertTriangle, Scale } from "lucide-react";
 
 export function FinanceiroTab({ city }: { city: string }) {
   const d = DB[city];
@@ -87,16 +79,8 @@ export function FinanceiroTab({ city }: { city: string }) {
   );
 }
 
-interface FinCardProps {
-  col: "red" | "purple" | "orange";
-  icon: LucideIcon;
-  title: string;
-  val: number;
-  sub: string;
-}
-
-function FinCard({ col, icon: Icon, title, val, sub }: FinCardProps) {
-  const colors: Record<string, string> = {
+function FinCard({ col, icon: Icon, title, val, sub }: any) {
+  const colors: any = {
     red: "border-red-200 bg-red-50 hover:border-red-400 text-red-500 bg-red-500",
     purple: "border-purple-200 bg-purple-50 hover:border-purple-400 text-purple-500 bg-purple-500",
     orange: "border-orange-200 bg-orange-50 hover:border-orange-400 text-orange-500 bg-orange-500",
@@ -119,14 +103,7 @@ function FinCard({ col, icon: Icon, title, val, sub }: FinCardProps) {
   );
 }
 
-interface RclBarProps {
-  label: string;
-  val: number;
-  rcl: number;
-  col: string;
-}
-
-function RclBar({ label, val, rcl, col }: RclBarProps) {
+function RclBar({ label, val, rcl, col }: any) {
   const p = ((val / rcl) * 100).toFixed(1);
   return (
     <div>

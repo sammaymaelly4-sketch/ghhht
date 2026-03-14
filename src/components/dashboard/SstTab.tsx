@@ -124,15 +124,7 @@ export function SstTab({ city }: { city: string }) {
   );
 }
 
-interface SstRowProps {
-  doc: string;
-  ok: number;
-  desc: string;
-  crit: string;
-  imp: string;
-}
-
-function SstRow({ doc, ok, desc, crit, imp }: SstRowProps) {
+function SstRow({ doc, ok, desc, crit, imp }: any) {
   const isOk = ok === 1;
   return (
     <tr className="border-b border-slate-200 transition-colors hover:bg-slate-50">
